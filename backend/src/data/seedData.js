@@ -1,0 +1,142 @@
+export const seedTransactions = [
+  {
+    kind: "income",
+    amount: 4200,
+    category: "Salary",
+    date: "2026-01-03T00:00:00.000Z",
+    note: "Monthly salary",
+  },
+  {
+    kind: "expense",
+    amount: 860,
+    category: "Rent",
+    date: "2026-01-05T00:00:00.000Z",
+    note: "Apartment rent",
+  },
+  {
+    kind: "expense",
+    amount: 220,
+    category: "Groceries",
+    date: "2026-01-08T00:00:00.000Z",
+    note: "Weekly groceries",
+  },
+  {
+    kind: "expense",
+    amount: 110,
+    category: "Transport",
+    date: "2026-01-10T00:00:00.000Z",
+    note: "Commute pass",
+  },
+  {
+    kind: "income",
+    amount: 4250,
+    category: "Salary",
+    date: "2026-02-03T00:00:00.000Z",
+    note: "Monthly salary",
+  },
+  {
+    kind: "expense",
+    amount: 240,
+    category: "Groceries",
+    date: "2026-02-06T00:00:00.000Z",
+    note: "Groceries",
+  },
+  {
+    kind: "expense",
+    amount: 145,
+    category: "Utilities",
+    date: "2026-02-11T00:00:00.000Z",
+    note: "Electricity and internet",
+  },
+  {
+    kind: "expense",
+    amount: 310,
+    category: "Dining",
+    date: "2026-02-14T00:00:00.000Z",
+    note: "Weekend outings",
+  },
+  {
+    kind: "income",
+    amount: 4300,
+    category: "Salary",
+    date: "2026-03-03T00:00:00.000Z",
+    note: "Monthly salary",
+  },
+  {
+    kind: "income",
+    amount: 420,
+    category: "Freelance",
+    date: "2026-03-12T00:00:00.000Z",
+    note: "Landing page project",
+  },
+  {
+    kind: "expense",
+    amount: 275,
+    category: "Groceries",
+    date: "2026-03-08T00:00:00.000Z",
+    note: "Bulk grocery run",
+  },
+  {
+    kind: "expense",
+    amount: 180,
+    category: "Health",
+    date: "2026-03-19T00:00:00.000Z",
+    note: "Annual checkup",
+  },
+  {
+    kind: "income",
+    amount: 4300,
+    category: "Salary",
+    date: "2026-04-03T00:00:00.000Z",
+    note: "Monthly salary",
+  },
+  {
+    kind: "expense",
+    amount: 350,
+    category: "Travel",
+    date: "2026-04-09T00:00:00.000Z",
+    note: "Weekend trip booking",
+  },
+  {
+    kind: "expense",
+    amount: 290,
+    category: "Groceries",
+    date: "2026-04-12T00:00:00.000Z",
+    note: "Family shopping",
+  },
+  {
+    kind: "expense",
+    amount: 125,
+    category: "Transport",
+    date: "2026-04-15T00:00:00.000Z",
+    note: "Fuel",
+  },
+];
+
+export const seedBudgets = [
+  { category: "Rent", monthlyLimit: 900, month: "2026-04" },
+  { category: "Groceries", monthlyLimit: 450, month: "2026-04" },
+  { category: "Transport", monthlyLimit: 180, month: "2026-04" },
+  { category: "Dining", monthlyLimit: 250, month: "2026-04" },
+  { category: "Travel", monthlyLimit: 400, month: "2026-04" },
+];
+
+export const seedGoals = [
+  {
+    name: "Emergency Fund",
+    targetAmount: 6000,
+    currentAmount: 2200,
+    targetDate: "2026-12-31T00:00:00.000Z",
+    color: "#14b8a6",
+    isCompleted: false,
+  },
+  {
+    name: "Laptop Upgrade",
+    targetAmount: 1800,
+    currentAmount: 950,
+    targetDate: "2026-08-15T00:00:00.000Z",
+    color: "#f97316",
+    isCompleted: false,
+  },
+];
+

@@ -9,9 +9,11 @@ import { StatCard } from "./components/StatCard.jsx";
 import { TransactionForm } from "./components/TransactionForm.jsx";
 import { TransactionsTable } from "./components/TransactionsTable.jsx";
 import { TrendChart } from "./components/TrendChart.jsx";
+import { AuthPage } from "./components/AuthPage.jsx";
+import { useAuth } from "./context/AuthContext.jsx";
 import { api, fetchDashboardData } from "./services/api.js";
 
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "http://localhost:5000";
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "http://localhost:5004";
 
 function formatCurrency(value) {
   return new Intl.NumberFormat("en-IN", {
@@ -39,6 +41,7 @@ const emptyDashboard = {
 };
 
 export default function App() {
+  const { token, user, logout } = useAuth();
   const [dashboard, setDashboard] = useState(emptyDashboard);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -56,14 +59,15 @@ export default function App() {
   }
 
   useEffect(() => {
-    loadDashboard();
-  }, []);
+    if (token) loadDashboard();
+  }, [token]);
 
   useEffect(() => {
+    if (!token) return;
     const socket = io(SOCKET_URL);
     socket.on("finance:updated", loadDashboard);
     return () => socket.close();
-  }, []);
+  }, [token]);
 
   async function createTransaction(payload) {
     await api.post("/transactions", payload);
@@ -85,13 +89,29 @@ export default function App() {
     await loadDashboard();
   }
 
+  // Show auth page if not logged in
+  if (!token) return <AuthPage />;
+
   const { totals, budgetProgress, trends } = dashboard.summary;
 
   return (
     <main className="min-h-screen px-4 py-8 text-white md:px-8">
       <div className="mx-auto max-w-7xl">
         <section className="mb-8 overflow-hidden rounded-[36px] border border-white/10 bg-white/5 p-8 shadow-glow backdrop-blur">
-          <p className="text-sm uppercase tracking-[0.4em] text-teal-200">FinanceFlow</p>
+          <div className="flex items-start justify-between">
+            <p className="text-sm uppercase tracking-[0.4em] text-teal-200">FinanceFlow</p>
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-slate-400">
+                Hi, <span className="text-white">{user?.name}</span>
+              </span>
+              <button
+                onClick={logout}
+                className="rounded-xl border border-white/10 bg-slate-950/60 px-4 py-2 text-sm text-slate-300 transition hover:bg-white/10 hover:text-white"
+              >
+                Sign out
+              </button>
+            </div>
+          </div>
           <div className="mt-4 grid gap-6 lg:grid-cols-[1.4fr_0.8fr]">
             <div>
               <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white md:text-6xl">

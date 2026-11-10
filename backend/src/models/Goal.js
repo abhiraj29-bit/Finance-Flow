@@ -2,6 +2,12 @@ import mongoose from "mongoose";
 
 const goalSchema = new mongoose.Schema(
   {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
     name: {
       type: String,
       required: true,
@@ -33,5 +39,7 @@ const goalSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const Goal = mongoose.model("Goal", goalSchema);
+goalSchema.index({ userId: 1, targetDate: 1 });
+goalSchema.index({ userId: 1, isCompleted: 1 });
 
+export const Goal = mongoose.model("Goal", goalSchema);

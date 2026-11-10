@@ -25,8 +25,8 @@ export function TrendChart({ data }) {
               borderRadius: "16px",
             }}
           />
-          <Area type="monotone" dataKey="income" stroke="#6ee7b7" fill="url(#incomeFill)" />
-          <Area type="monotone" dataKey="expense" stroke="#fb7185" fill="url(#expenseFill)" />
+          <Area type="monotone" dataKey="income" name="Deposit" stroke="#6ee7b7" fill="url(#incomeFill)" />
+          <Area type="monotone" dataKey="expense" name="Withdrawal" stroke="#fb7185" fill="url(#expenseFill)" />
         </AreaChart>
       </ResponsiveContainer>
     </div>

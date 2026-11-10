@@ -2,6 +2,12 @@ import mongoose from "mongoose";
 
 const transactionSchema = new mongoose.Schema(
   {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
     kind: {
       type: String,
       enum: ["income", "expense"],
@@ -28,7 +34,7 @@ const transactionSchema = new mongoose.Schema(
     },
     source: {
       type: String,
-      enum: ["manual", "goal-allocation"],
+      enum: ["manual", "goal-allocation", "recurring"],
       default: "manual",
     },
     goalId: {
@@ -36,9 +42,23 @@ const transactionSchema = new mongoose.Schema(
       ref: "Goal",
       default: null,
     },
+    recurringScheduleId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "RecurringTransaction",
+      default: null,
+    },
+    idempotencyKey: {
+      type: String,
+      sparse: true,
+      unique: true,
+    },
   },
   { timestamps: true }
 );
 
-export const Transaction = mongoose.model("Transaction", transactionSchema);
+transactionSchema.index({ userId: 1, date: -1, createdAt: -1 });
+transactionSchema.index({ userId: 1, kind: 1 });
+transactionSchema.index({ userId: 1, category: 1 });
+transactionSchema.index({ userId: 1, date: 1 });
 
+export const Transaction = mongoose.model("Transaction", transactionSchema);

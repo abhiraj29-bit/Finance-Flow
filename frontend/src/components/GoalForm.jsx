@@ -44,12 +44,18 @@ export function GoalForm({ onSubmit }) {
         onChange={updateField}
       />
       <input
-        className="rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white"
+        className="rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white focus:border-teal-400 focus:outline-none cursor-pointer"
         type="date"
         name="targetDate"
+        title="Click to open mini calendar or type dd/mm/yyyy directly"
         required
         value={form.targetDate}
         onChange={updateField}
+        onClick={(e) => {
+          try {
+            e.target.showPicker?.();
+          } catch {}
+        }}
       />
       <input
         className="h-12 w-full rounded-2xl border border-white/10 bg-slate-950/70 p-2"

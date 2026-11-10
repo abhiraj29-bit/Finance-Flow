@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  color-scheme: dark;
   color: #e2e8f0;
   background:
     radial-gradient(circle at top left, rgba(45, 212, 191, 0.18), transparent 28%),
@@ -19,5 +20,28 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+/* Date and Month Input Styling — ensures calendar picker indicator is bright, visible, and interactive in dark mode */
+input[type="date"],
+input[type="month"] {
+  color-scheme: dark;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.9) brightness(1.2);
+  opacity: 0.85;
+  padding: 4px;
+  border-radius: 6px;
+  transition: opacity 0.2s ease, transform 0.15s ease, background-color 0.2s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="month"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  transform: scale(1.15);
+  background-color: rgba(45, 212, 191, 0.2);
 }
 

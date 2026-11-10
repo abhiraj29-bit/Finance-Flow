@@ -30,7 +30,14 @@ export function AuthPage() {
         await register({ name: form.name, email: form.email, password: form.password });
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong");
+      const serverMessage = err.response?.data?.message;
+      if (serverMessage) {
+        setError(serverMessage);
+      } else if (err.code === "ERR_NETWORK" || !err.response) {
+        setError("Unable to connect to the backend server. Please ensure the backend is running on port 5004.");
+      } else {
+        setError(err.message || "Something went wrong. Please check your credentials and try again.");
+      }
     } finally {
       setLoading(false);
     }
